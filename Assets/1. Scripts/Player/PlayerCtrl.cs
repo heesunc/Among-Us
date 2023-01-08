@@ -6,12 +6,14 @@ using UnityEngine;
 public class PlayerCtrl : MonoBehaviour
 {
     public GameObject joyStick;
+    Animator anim;
     public float speed;
     // 인스펙터 창에서 설정하기 위해 public으로 작성
     public bool isJoyStick;
     
     private void Start()
     {
+        anim = GetComponent<Animator>();
         Camera.main.transform.parent = transform;
         // 메인 카메라의 부모를 지정. 캐릭터가 메인 카메라의 부모가 되는 것. 이 transform은 캐릭터꺼
         Camera.main.transform.localPosition = new Vector3(0, 0, -10);
@@ -42,6 +44,24 @@ public class PlayerCtrl : MonoBehaviour
                 // .normalized로 정규화. 방향 벡터로 바뀌어서 방향을 알 수 있음. dir에 저장
                 transform.position += dir * speed * Time.deltaTime;
                 // transform에 계속해서 추가. 기기마다 속도가 다를 수 있기 때문에 Time.deltaTime(실제시간)을 곱해줌
+                
+                anim.SetBool("isWalk",true);
+                
+                // 왼쪽으로 이동
+                if (dir.x < 0)
+                {
+                    transform.localScale = new Vector3(-1, 1, 1);
+                } 
+                // 오른쪽으로 이동
+                else
+                {
+                    transform.localScale = new Vector3(1, 1, 1);
+                }
+            }
+            // 클릭하지 않는다면
+            else
+            {
+                anim.SetBool("isWalk",false);
             }
         }
         

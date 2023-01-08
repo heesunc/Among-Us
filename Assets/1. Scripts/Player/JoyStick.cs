@@ -9,13 +9,15 @@ public class JoyStick : MonoBehaviour
 {
     public RectTransform stick, backGround;
     PlayerCtrl PlayerCtrl_script;
-    
+    Animator anim;
+
     bool isDrag;
     float limit;
 
     private void Start()
     {
         PlayerCtrl_script = GetComponent<PlayerCtrl>();
+        anim = GetComponent<Animator>();
         limit = backGround.rect.width * 0.5f;
     }
 
@@ -30,10 +32,25 @@ public class JoyStick : MonoBehaviour
             Vector3 dir = (stick.position - backGround.position).normalized; // 정규화
             transform.position += dir * PlayerCtrl_script.speed * Time.deltaTime;
             
+            anim.SetBool("isWalk",true);
+                
+            // 왼쪽으로 이동
+            if (dir.x < 0)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            } 
+            // 오른쪽으로 이동
+            else
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+            
             // 드래그 끝나면
             if (Input.GetMouseButtonUp(0))
             {
                 stick.localPosition = new Vector3(0, 0, 0);
+                anim.SetBool("isWalk",false);
+                
                 isDrag = false; // 다시 원위치로
             }
         }
