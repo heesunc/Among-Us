@@ -1,15 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class PlayerCtrl : MonoBehaviour
 {
     public GameObject joyStick, mainView, missionView;
     public Settings settings_script;
+    public Button btn;
     
     Animator anim;
+    GameObject coll; // 미션 아이템 저장
     
     public float speed;
 
@@ -93,7 +97,33 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (col.tag == "Mission")
         {
-            print("미션 감지");
+            coll = col.gameObject;
+            btn.interactable = true;
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.tag == "Mission")
+        {
+            coll = null;
+            btn.interactable = false;
+        }
+    }
+    
+    // 버튼 누르면 호출
+    public void ClickButton()
+    {
+        // MissionStart를 호출
+        coll.SendMessage("MissionStart");
+
+        isCantMove = true;
+        btn.interactable = false;
+    }
+    
+    // 미션 종료하면 호출
+    public void MissionEnd()
+    {
+        isCantMove = false; 
     }
 }
