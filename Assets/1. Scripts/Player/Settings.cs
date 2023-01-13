@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -10,7 +11,15 @@ public class Settings : MonoBehaviour
     public Image touchBtn, joyStickBtn;
     public Color blue;
     public PlayerCtrl playerCtrl_script;
-    
+
+    GameObject mainView, missionView;
+
+    private void Start()
+    {
+        mainView = playerCtrl_script.mainView;
+        missionView = playerCtrl_script.missionView;
+    }
+
     // 설정 버튼을 누르면 호출
     public void ClickSetting()
     {
@@ -39,5 +48,15 @@ public class Settings : MonoBehaviour
         isJoyStick = true;
         touchBtn.color = Color.white;;
         joyStickBtn.color = blue;
+    }
+    
+    // 게임 나가기 버튼을 누르면 호출
+    public void ClickQuit()
+    {
+        mainView.SetActive(true);
+        missionView.SetActive(false);
+        
+        // 캐릭터 삭제
+        playerCtrl_script.DestroyPlayer();
     }
 }

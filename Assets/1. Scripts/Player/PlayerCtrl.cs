@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class PlayerCtrl : MonoBehaviour
 {
-    public GameObject joyStick;
+    public GameObject joyStick, mainView, missionView;
     public Settings settings_script;
     
     Animator anim;
@@ -51,19 +51,20 @@ public class PlayerCtrl : MonoBehaviour
             {
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    Vector3 dir = (Input.mousePosition - new Vector3(Screen.width * 0.5f, Screen.height * 0.5f)).normalized;
+                    Vector3 dir = (Input.mousePosition - new Vector3(Screen.width * 0.5f, Screen.height * 0.5f))
+                        .normalized;
                     // 클릭한 값 - 스크린의 가운데 -> 어느 방향으로 터치를 했는지 알 수 있음
                     // .normalized로 정규화. 방향 벡터로 바뀌어서 방향을 알 수 있음. dir에 저장
                     transform.position += dir * speed * Time.deltaTime;
                     // transform에 계속해서 추가. 기기마다 속도가 다를 수 있기 때문에 Time.deltaTime(실제시간)을 곱해줌
-                
-                    anim.SetBool("isWalk",true);
-                
+
+                    anim.SetBool("isWalk", true);
+
                     // 왼쪽으로 이동
                     if (dir.x < 0)
                     {
                         transform.localScale = new Vector3(-1, 1, 1);
-                    } 
+                    }
                     // 오른쪽으로 이동
                     else
                     {
@@ -74,9 +75,25 @@ public class PlayerCtrl : MonoBehaviour
             // 클릭하지 않는다면
             else
             {
-                anim.SetBool("isWalk",false);
+                anim.SetBool("isWalk", false);
             }
         }
-        
+    }
+    
+    // 캐릭터 삭제
+    public void DestroyPlayer()
+    {
+        Camera.main.transform.parent = null;
+        // 카메라 없어지게 null 값 넣어줌
+        Destroy(gameObject);
+    }
+
+    // 원래 유니티에 있는 함수, Is Trigger가 체크되어있는 Collider와 닿았을 때 호출되는 함수
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.tag == "Mission")
+        {
+            print("미션 감지");
+        }
     }
 }
