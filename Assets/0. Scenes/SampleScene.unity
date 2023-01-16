@@ -361,6 +361,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trash: {fileID: 1003900042}
+  handle: {fileID: 1934183522}
+  bottom: {fileID: 1852183561}
+  anim_shake: {fileID: 1684027115}
 --- !u!1 &68975628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,6 +1543,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1003900042}
+  - component: {fileID: 1003900043}
   m_Layer: 5
   m_Name: Trash
   m_TagString: Untagged
@@ -1567,6 +1571,20 @@ RectTransform:
   m_AnchoredPosition: {x: -117.2, y: 0}
   m_SizeDelta: {x: 450, y: 680}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1003900043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003900041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!1 &1143346667
 GameObject:
   m_ObjectHideFlags: 0
@@ -7690,6 +7708,7 @@ GameObject:
   - component: {fileID: 1684027113}
   - component: {fileID: 1684027112}
   - component: {fileID: 1684027111}
+  - component: {fileID: 1684027115}
   m_Layer: 5
   m_Name: BackGround
   m_TagString: Untagged
@@ -7811,6 +7830,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1684027109}
   m_CullTransparentMesh: 1
+--- !u!95 &1684027115
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684027109}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e1d897c45f54bc04ab106c6a9f4a73d6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1731324685
 GameObject:
   m_ObjectHideFlags: 0
@@ -8206,6 +8245,7 @@ GameObject:
   - component: {fileID: 1934183522}
   - component: {fileID: 1934183524}
   - component: {fileID: 1934183523}
+  - component: {fileID: 1934183525}
   m_Layer: 5
   m_Name: Handle
   m_TagString: Untagged
@@ -8271,6 +8311,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1934183521}
   m_CullTransparentMesh: 1
+--- !u!114 &1934183525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934183521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 65788250}
+          m_TargetAssemblyTypeName: Mission2, Assembly-CSharp
+          m_MethodName: ClickHandle
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1937835171
 GameObject:
   m_ObjectHideFlags: 0
