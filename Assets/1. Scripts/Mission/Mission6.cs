@@ -16,7 +16,8 @@ public class Mission6 : MonoBehaviour
     
     Animator anim;
     PlayerCtrl playerCtrl_script;
-
+    MissionCtrl missionCtrl_script;
+    
     Vector2 clickPos;
     LineRenderer line;
     Color leftC, rightC;
@@ -26,6 +27,7 @@ public class Mission6 : MonoBehaviour
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        missionCtrl_script = FindObjectOfType<MissionCtrl>();
     }
 
     private void Update()
@@ -144,5 +146,6 @@ public class Mission6 : MonoBehaviour
     public void MissionSuccess()
     {
         MissionCancle();
+        missionCtrl_script.MissionSuccess(GetComponent<CircleCollider2D>());
     }
 }

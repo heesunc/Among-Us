@@ -9,10 +9,12 @@ public class Mission3 : MonoBehaviour
     public Text inputText, keyCode;
     Animator anim;
     PlayerCtrl playerCtrl_script;
+    MissionCtrl missionCtrl_script;
     
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        missionCtrl_script = FindObjectOfType<MissionCtrl>();
     }
     
     // 미션 시작
@@ -69,5 +71,6 @@ public class Mission3 : MonoBehaviour
     public void MissionSuccess()
     {
         MissionCancle();
+        missionCtrl_script.MissionSuccess(GetComponent<CircleCollider2D>());
     }
 }

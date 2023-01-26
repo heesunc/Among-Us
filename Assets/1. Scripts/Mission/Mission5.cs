@@ -16,6 +16,7 @@ public class Mission5 : MonoBehaviour
     Animator anim;
     PlayerCtrl playerCtrl_script;
     RectTransform rect_handle;
+    MissionCtrl missionCtrl_script;
     
     bool isDrag, isPlay;
     float rand;
@@ -23,6 +24,7 @@ public class Mission5 : MonoBehaviour
     {
         anim = GetComponentInChildren<Animator>();
         rect_handle = handle.GetComponent<RectTransform>();
+        missionCtrl_script = FindObjectOfType<MissionCtrl>();
     }
 
     private void Update()
@@ -101,5 +103,6 @@ public class Mission5 : MonoBehaviour
     public void MissionSuccess()
     {
         MissionCancle();
+        missionCtrl_script.MissionSuccess(GetComponent<CircleCollider2D>());
     }
 }
