@@ -8,16 +8,17 @@ using UnityEngine.EventSystems;
 
 public class PlayerCtrl : MonoBehaviour
 {
-    public GameObject joyStick, mainView, missionView;
+    public GameObject joyStick, mainView, playView;
     public Settings settings_script;
     public Button btn;
+    public Sprite use, kill;
     
     Animator anim;
     GameObject coll; // 미션 아이템 저장
     
     public float speed;
 
-    public bool isCantMove;
+    public bool isCantMove, isMission;
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -26,6 +27,17 @@ public class PlayerCtrl : MonoBehaviour
         Camera.main.transform.localPosition = new Vector3(0, 0, -10);
         // 캐릭터가 어떤 위치에서 생겨도 카메라 0으로 설정해주어야함
         // 2D는 z값이 필요 없지만, 카메라는 기본 z축이 -10임
+        
+        // 미션이라면
+        if (isMission)
+        {
+            btn.GetComponent<Image>().sprite = use;
+        }
+        // 킬 퀘스트라면
+        else
+        {
+            btn.GetComponent<Image>().sprite = kill;
+        }
     }
 
     private void Update()
@@ -95,7 +107,13 @@ public class PlayerCtrl : MonoBehaviour
     // 원래 유니티에 있는 함수, Is Trigger가 체크되어있는 Collider와 닿았을 때 호출되는 함수
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Mission")
+        if (col.tag == "Mission" && isMission)
+        {
+            coll = col.gameObject;
+            btn.interactable = true;
+        }
+        
+        if (col.tag == "NPC" && !isMission)
         {
             coll = col.gameObject;
             btn.interactable = true;
@@ -105,6 +123,11 @@ public class PlayerCtrl : MonoBehaviour
     private void OnTriggerExit2D(Collider2D col)
     {
         if (col.tag == "Mission")
+        {
+            coll = null;
+            btn.interactable = false;
+        }
+        if (col.tag == "NPC" && !isMission)
         {
             coll = null;
             btn.interactable = false;

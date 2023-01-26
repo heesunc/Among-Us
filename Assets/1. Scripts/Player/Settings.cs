@@ -12,12 +12,12 @@ public class Settings : MonoBehaviour
     public Color blue;
     public PlayerCtrl playerCtrl_script;
 
-    GameObject mainView, missionView;
+    GameObject mainView, playView;
 
     private void Start()
     {
         mainView = playerCtrl_script.mainView;
-        missionView = playerCtrl_script.missionView;
+        playView = playerCtrl_script.playView;
     }
 
     // 설정 버튼을 누르면 호출
@@ -54,7 +54,7 @@ public class Settings : MonoBehaviour
     public void ClickQuit()
     {
         mainView.SetActive(true);
-        missionView.SetActive(false);
+        playView.SetActive(false);
         
         // 캐릭터 삭제
         playerCtrl_script.DestroyPlayer();
