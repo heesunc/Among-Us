@@ -12,6 +12,7 @@ public class PlayerCtrl : MonoBehaviour
     public Settings settings_script;
     public Button btn;
     public Sprite use, kill;
+    public Text text_cool;
     
     Animator anim;
     GameObject coll; // 미션 아이템 저장
@@ -19,6 +20,9 @@ public class PlayerCtrl : MonoBehaviour
     public float speed;
 
     public bool isCantMove, isMission;
+
+    float timer;
+    bool isCool;
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -32,16 +36,33 @@ public class PlayerCtrl : MonoBehaviour
         if (isMission)
         {
             btn.GetComponent<Image>().sprite = use;
+            text_cool.text = ""; // kill의 쿨타임 초가 보이지 않도록
         }
         // 킬 퀘스트라면
         else
         {
             btn.GetComponent<Image>().sprite = kill;
+
+            timer = 5;
+            isCool = true;
         }
     }
 
     private void Update()
     {
+        // 킬 쿨타임
+        if (isCool)
+        {
+            timer -= Time.deltaTime;
+            text_cool.text = Mathf.Ceil(timer).ToString(); // 소수점을 올림해줌
+
+            if (text_cool.text == "0")
+            {
+                text_cool.text = "";
+                isCool = false;
+            }
+            // text가 0이 되었을 때 비도록 해주고 isCool을 false로 바꿔줌
+        }
         if (isCantMove)
         {
             joyStick.SetActive(false);
@@ -113,7 +134,7 @@ public class PlayerCtrl : MonoBehaviour
             btn.interactable = true;
         }
         
-        if (col.tag == "NPC" && !isMission)
+        if (col.tag == "NPC" && !isMission && !isCool)
         {
             coll = col.gameObject;
             btn.interactable = true;
