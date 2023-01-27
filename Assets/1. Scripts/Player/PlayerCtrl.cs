@@ -16,13 +16,14 @@ public class PlayerCtrl : MonoBehaviour
     
     Animator anim;
     GameObject coll; // 미션 아이템 저장
+    KillCtrl killCtrl_script;
     
     public float speed;
 
     public bool isCantMove, isMission;
 
     float timer;
-    bool isCool;
+    bool isCool, isAnim;
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -41,6 +42,7 @@ public class PlayerCtrl : MonoBehaviour
         // 킬 퀘스트라면
         else
         {
+            killCtrl_script = FindObjectOfType<KillCtrl>();
             btn.GetComponent<Image>().sprite = kill;
 
             timer = 5;
@@ -70,6 +72,15 @@ public class PlayerCtrl : MonoBehaviour
         else
         {
             Move();    
+        }
+        
+        // 애니메이션이 끝났다면
+        if (isAnim && killCtrl_script.kill_anim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+        {
+            killCtrl_script.kill_anim.SetActive(false);
+            killCtrl_script.Kill();
+            isCantMove = false;
+            isAnim = false;
         }
     }
 
@@ -158,11 +169,31 @@ public class PlayerCtrl : MonoBehaviour
     // 버튼 누르면 호출
     public void ClickButton()
     {
-        // MissionStart를 호출
-        coll.SendMessage("MissionStart");
+        // 미션일 때
+        if (isMission)
+        {
+            // MissionStart를 호출
+            coll.SendMessage("MissionStart");
+        }
+        // 킬 퀘스트일 때
+        else
+        {
+            Kill();
+        }
 
         isCantMove = true;
         btn.interactable = false;
+    }
+
+    void Kill()
+    {
+        // 죽이는 애니메이션
+        killCtrl_script.kill_anim.SetActive(true);
+        isAnim = true;
+        // 죽은 이미지 변경
+        coll.SendMessage("Dead");
+        // 죽은 NPC는 다시 죽일 수 없게 콜라이더를 false로 만들어줌
+        coll.GetComponent<CircleCollider2D>().enabled = false;
     }
     
     // 미션 종료하면 호출

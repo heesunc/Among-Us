@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2331933191041289299}
   - component: {fileID: 6746261750037202919}
   - component: {fileID: 4745584708710252378}
+  - component: {fileID: 5994043679147455912}
   m_Layer: 0
   m_Name: NPC
   m_TagString: NPC
@@ -101,3 +102,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.8
+--- !u!114 &5994043679147455912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5258167551547268803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34debb7b5e254a14cb2fc1d50e2b2a03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idles:
+  - {fileID: 21300000, guid: d49ff27ef4447354b811bf4a3a0c3517, type: 3}
+  - {fileID: 21300000, guid: 5ff60d87da0f643478635bbb138f4c64, type: 3}
+  - {fileID: 21300000, guid: 3574a8bbec45e8c4f98f29b91b0918ba, type: 3}
+  - {fileID: 21300000, guid: e531f462d0e9e6f40b04a1b064e38aa2, type: 3}
+  - {fileID: 21300000, guid: fbb81143c11459444b8fcb87733d56dd, type: 3}
+  deads:
+  - {fileID: 21300000, guid: abfb7c1079f7da64798bbe9943fce8ab, type: 3}
+  - {fileID: 21300000, guid: dbd2a3c10cc88e045b57ebc9895c7633, type: 3}
+  - {fileID: 21300000, guid: 4e0bbc70df576b4419c36c7b144c0135, type: 3}
+  - {fileID: 21300000, guid: f8c82395b7a168040b19bc169b87c1c1, type: 3}
+  - {fileID: 21300000, guid: 52cb94b237a7b0547a6498cf12963f69, type: 3}

@@ -6,11 +6,16 @@ using UnityEngine;
 public class KillCtrl : MonoBehaviour
 {
     public Transform[] spawnPoints;
+    public GameObject kill_anim, text_anim, mainView;
 
     List<int> number = new List<int>();
+
+    int count; // 몇 명을 죽였는지 체크할 변수
     // 초기화
     public void KillReset()
     {
+        kill_anim.SetActive(false);
+        text_anim.SetActive(false);
         number.Clear(); // 비워주기
 
         for (int i = 0; i < spawnPoints.Length; i++)
@@ -47,5 +52,27 @@ public class KillCtrl : MonoBehaviour
         {
             Instantiate(Resources.Load("NPC"), spawnPoints[number[i]]);
         }
+    }
+
+    // 킬 하면 호출
+    public void Kill()
+    {
+        count++;
+
+        if (count == 5)
+        {
+            text_anim.SetActive(true);
+            Invoke("Change",1f);
+        }
+    }
+    
+    // 화면 전환
+    public void Change()
+    {
+        mainView.SetActive(true);
+        gameObject.SetActive(false);
+        
+        // 캐릭터 삭제
+        FindObjectOfType<PlayerCtrl>().DestroyPlayer();
     }
 }
