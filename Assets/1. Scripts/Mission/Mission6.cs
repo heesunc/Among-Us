@@ -35,7 +35,8 @@ public class Mission6 : MonoBehaviour
         // 드래그
         if (isDrag)
         {
-            line.SetPosition(1, new Vector3(Input.mousePosition.x - clickPos.x, Input.mousePosition.y - clickPos.y, -10));
+            line.SetPosition(1, new Vector3((Input.mousePosition.x - clickPos.x) * 1920f / Screen.width, 
+                (Input.mousePosition.y - clickPos.y) * 1080f / Screen.height, -10));
             // 드래그 끝
             if (Input.GetMouseButtonUp(0))
             {
