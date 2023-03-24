@@ -1,0 +1,29 @@
+[15강 쓰레기 버리기 미션 버그 해결 방법]
+
+버그 내용 :
+쓰레기 버리는 미션 진행 중,
+핸들을 아래로 드래그하는 행동을 오랫동안 지속하면
+드래그를 끝내도 핸들이 원상복귀 되지 않고, UI를 끌 수 없는 오류
+
+버그 원인 :
+핸들을 아래로 드래그하는 중에 미션이 완료되면,
+Mission2 스크립트 속 isPlay가 false로 변하기 때문에
+드래그가 끝났는지를 판단하는 if문 코드가 실행되지 않아서
+핸들을 원상복귀 하거나 애니메이션을 종료하는 코드가 실행되지 않기 때문
+
+해결 방법 :
+드래그가 끝났을 때 실행되는 코드 3줄을 복사한 후,
+미션에 성공했는지를 판단하는 if문 코드 속에서
+isPlay를 false로 바꾸는 코드 아래에 붙여넣기 한다
+↓
+// 성공여부 체크
+if (trash.childCount == 0)
+{
+   MissionSuccess();
+   isPlay = false;
+   
+   추가)
+   rect_handle.anchorePosition = originPos;
+   isDrag = false;
+   anim_shake.enabled = false;
+}
