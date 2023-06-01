@@ -1,4 +1,8 @@
 # Among-Us
+![image](https://github.com/heesunc/Among-Us/assets/112846188/3f6520cd-d23c-4bbc-9a6b-3328a898dda3)
+![image](https://github.com/heesunc/Among-Us/assets/112846188/1656ac26-7812-42b6-ba8e-4a464b912704)
+![image](https://github.com/heesunc/Among-Us/assets/112846188/07d1e312-6c0b-4e0a-b4b2-95478950d735)
+
 베어유 unity로 어몽어스 개발 
 
 # 실행방법
